@@ -1,9 +1,24 @@
 package com.baohng.model;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
 public class Todo {
+
+    //add primary key for model
+    @Id
+    @SequenceGenerator( //define the way id created
+            name = "todo_id_sequence",
+            sequenceName = "todo_id_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "todo_id_sequence"
+    )
     private Integer id;
     private String title;
     private String description;
@@ -17,6 +32,10 @@ public class Todo {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
+    }
+
+    public Todo() {
+
     }
 
     public Integer getId() {
